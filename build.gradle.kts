@@ -1,3 +1,6 @@
+import org.gradle.internal.impldep.org.joda.time.DateTime
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
   kotlin("jvm") version "1.9.24"
   kotlin("plugin.spring") version "1.9.24"
@@ -44,4 +47,10 @@ kotlin {
 
 tasks.withType<Test> {
   useJUnitPlatform()
+}
+
+
+tasks.getByName<BootBuildImage>("bootBuildImage") {
+  environment = mapOf("BP_JVM_VERSION" to "22")
+  imageName = "${project.group.toString().split(".").last()}/${project.name}:${project.version}"
 }
