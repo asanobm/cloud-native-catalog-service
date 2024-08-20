@@ -1,5 +1,4 @@
-FROM amazoncorretto:22-jdk AS builder
-
+FROM amazoncorretto:22 AS builder
 WORKDIR /app
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} catalog-service.jar
