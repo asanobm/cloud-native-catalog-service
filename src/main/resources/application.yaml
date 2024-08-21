@@ -3,7 +3,7 @@ spring:
     name: cloud-native-catalog-service
 
 server:
-  port: 8080
+  port: 9091
   tomcat:
     connection-timeout: 2s
     keep-alive-timeout: 15s
