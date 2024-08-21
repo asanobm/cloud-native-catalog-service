@@ -1,5 +1,6 @@
 import org.gradle.internal.impldep.org.joda.time.DateTime
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+import java.util.*
 
 plugins {
   kotlin("jvm") version "1.9.24"
@@ -43,6 +44,7 @@ dependencies {
   testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+  testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
@@ -60,5 +62,10 @@ tasks.withType<Test> {
 
 tasks.getByName<BootBuildImage>("bootBuildImage") {
   environment = mapOf("BP_JVM_VERSION" to "22")
+  val builder = if (System.getProperty("os.arch").lowercase(Locale.getDefault()).startsWith("aarch")) {
+    "ghcr.io/thomasvitale/java-builder-arm64"
+  } else {
+    "paketobuildpacks/builder:tiny"
+  }
   imageName = "${project.group.toString().split(".").last()}/${project.name}:${project.version}"
 }
