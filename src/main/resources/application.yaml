@@ -1,1 +1,12 @@
-spring.application.name=cloud-native-catalog-service
+spring:
+  application:
+    name: cloud-native-catalog-service
+
+server:
+  port: 8080
+  tomcat:
+    connection-timeout: 2s
+    keep-alive-timeout: 15s
+    threads:
+      max: 1000
+      min-spare: 10
