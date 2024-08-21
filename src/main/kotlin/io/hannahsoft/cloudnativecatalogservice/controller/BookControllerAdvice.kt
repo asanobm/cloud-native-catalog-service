@@ -29,7 +29,7 @@ class BookControllerAdvice {
   @ExceptionHandler(MethodArgumentNotValidException::class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): Map<String, String> {
-    var errors = mutableMapOf<String, String>()
+    val errors = mutableMapOf<String, String>()
     e.bindingResult.fieldErrors.forEach { error ->
       errors[error.field] = error.defaultMessage!!
     }

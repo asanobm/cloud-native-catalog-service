@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController
 class BookController(private val bookService: BookService) {
 
   @GetMapping
-
   fun get(): Iterable<Book> {
     return bookService.viewBookList()
   }
