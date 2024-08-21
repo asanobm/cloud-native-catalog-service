@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Positive
 import lombok.Data
 
-
-@Data
 data class Book(
   @get:NotNull(message = "ISBN is required")
   @get:Pattern(regexp = "[0-9]{10}|[0-9]{13}", message = "ISBN must be a valid ISBN-10 or ISBN-13")
