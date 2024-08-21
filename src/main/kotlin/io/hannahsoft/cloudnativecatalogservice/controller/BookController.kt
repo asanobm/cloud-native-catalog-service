@@ -2,6 +2,7 @@ package io.hannahsoft.cloudnativecatalogservice.controller
 
 import io.hannahsoft.cloudnativecatalogservice.domain.Book
 import io.hannahsoft.cloudnativecatalogservice.service.BookService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -30,7 +31,7 @@ class BookController(private val bookService: BookService) {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  fun post(@RequestBody book: Book): Book {
+  fun post(@Valid @RequestBody book: Book): Book {
     return bookService.addBookToCatalog(book)
   }
 
@@ -41,7 +42,7 @@ class BookController(private val bookService: BookService) {
   }
 
   @PatchMapping("{isbn}")
-  fun patch(@PathVariable isbn: String, @RequestBody book: Book): Book {
+  fun patch(@PathVariable isbn: String,@Valid @RequestBody book: Book): Book {
     return bookService.updateBookDetails(isbn, book)
   }
 }
